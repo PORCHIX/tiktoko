@@ -1,1 +1,1 @@
-web: cmd
+worker: cmd
