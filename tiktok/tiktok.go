@@ -20,7 +20,7 @@ func DownloadTikTokVideo(url string) (string, error) {
 	cmd := exec.Command("tiktok-scraper", "video", url, "-d", "-w")
 	out, err := cmd.CombinedOutput()
 	if err != nil {
-		return "", errors.New("\"Error running " + cmd.String() + ": " + err.Error())
+		return "", errors.New("Error running: " + err.Error())
 	}
 	filename, err := extractFileName(string(out))
 	if err != nil {
