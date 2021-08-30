@@ -2,10 +2,11 @@ package main
 
 import (
 	"os"
+	"tik-tok-video-downloader/pkg/handler"
 
 	"github.com/go-telegram-bot-api/telegram-bot-api"
-	"github.com/sirupsen/logrus"
 	"github.com/joho/godotenv"
+	"github.com/sirupsen/logrus"
 )
 
 func main() {
@@ -29,14 +30,14 @@ func main() {
 
 	updates, err := bot.GetUpdatesChan(u)
 
+	h := handler.NewHandler(bot)
+
 	for update := range updates {
 		if update.Message == nil { // ignore any non-Message Updates
 			continue
 		}
 
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
-		msg.ReplyToMessageID = update.Message.MessageID
-
-		bot.Send(msg)
+		h.HandleMessage([]string{"/start", "/about"}, handler.MessageStart(update.Message))
+		h.HandleMessage([]string{""}, handler.MessageText(update.Message))
 	}
 }
