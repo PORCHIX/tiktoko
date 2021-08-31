@@ -51,6 +51,7 @@ func isValidTikTokLink(link string) bool {
 func extractFileName(s string) (string, error) {
 	strs := strings.Split(s, " ")
 	logrus.Print(len(strs))
+	logrus.Print(strs)
 	if len(strs) != 3 {
 		return "", errors.New("unable to download tik tokvideo")
 	}
