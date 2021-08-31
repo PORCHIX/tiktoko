@@ -47,7 +47,7 @@ func MessageStart(message *tgbotapi.Message) response {
 }
 
 func MessageText(message *tgbotapi.Message) response {
-	for _, m := range strings.Split(message.Text, " ") {
+	for _, m := range strings.Fields(message.Text) {
 		logrus.Printf(m)
 		filename, err := tiktok.DownloadTikTokVideo(m)
 		if err != nil {
